@@ -1,13 +1,17 @@
-import express from 'express';
-import dotenv from 'dotenv';
-import routes from './src/routes/index.js';
-import connectMongoDB from './src/config/dbconfig.js';
-const app = express();
+import express from "express";
+import dotenv from "dotenv";
+import routes from "./routes/index.js";
+import connectMongoDB from "./config/dbconfig.js";
 dotenv.config();
-const port = process.env.PORT ||9000;
+const app = express();
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
+app.use(express.json());
+const port = process.env.PORT || 3000;
 const dbUrl = process.env.DB_URL || "mongodb://127.0.0.1:27017/db_movies";
-routes(app);
 connectMongoDB(dbUrl);
-app.listen(port,() => {
-    console.log("server runing :" + port);
-});
+routes(app);
+app.listen(port, () => console.log("Server running port: " + port));

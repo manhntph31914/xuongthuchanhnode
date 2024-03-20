@@ -1,12 +1,12 @@
-import Category from "../models/CategoryModel.js";
+import Genre from "../models/GenreModel.js";
 
-class CategoriesController {
-  async getAllCategories(req, res) {
+class GenresController {
+  async getAllGenres(req, res) {
     try {
-      const categoryList = await Category.find();
+      const genreList = await Genre.find();
       res.status(200).json({
         message: "Get Done",
-        data: categoryList,
+        data: genreList,
       });
     } catch (error) {
       res.status(400).json({
@@ -14,17 +14,17 @@ class CategoriesController {
       });
     }
   }
-  async getCategoryDetail(req, res) {
+  async getGenreDetail(req, res) {
     try {
-      const category = await Category.findById(req.params.id);
-      if (!category) {
+      const genre = await Genre.findById(req.params.id);
+      if (!genre) {
         return res.status(404).json({
           message: "Not Found",
         });
       }
       res.status(200).json({
         message: "Get Done",
-        data: category,
+        data: genre,
       });
     } catch (error) {
       res.status(400).json({
@@ -32,12 +32,12 @@ class CategoriesController {
       });
     }
   }
-  async creatCategory(req, res) {
+  async creatGenre(req, res) {
     try {
-      const category = await Category.create(req.body);
+      const genre = await Genre.create(req.body);
       res.status(200).json({
         message: "Create Done",
-        data: category,
+        data: genre,
       });
     } catch (error) {
       res.status(400).json({
@@ -45,23 +45,19 @@ class CategoriesController {
       });
     }
   }
-  async updateCategory(req, res) {
+  async updateGenre(req, res) {
     try {
-      const category = await Category.findByIdAndUpdate(
-        req.params.id,
-        req.body,
-        {
-          new: true,
-        }
-      );
-      if (!category) {
+      const genre = await Genre.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+      });
+      if (!genre) {
         return res.status(404).json({
           message: "Not Found",
         });
       }
       res.status(200).json({
         message: "Update Done",
-        data: category,
+        data: genre,
       });
     } catch (error) {
       res.status(400).json({
@@ -69,10 +65,10 @@ class CategoriesController {
       });
     }
   }
-  async deleteCategory(req, res) {
+  async deleteGenre(req, res) {
     try {
-      const category = await Category.findByIdAndDelete(req.params.id);
-      if (!category) {
+      const genre = await Genre.findByIdAndDelete(req.params.id);
+      if (!genre) {
         return res.status(404).json({
           message: "Not Found",
         });
@@ -88,4 +84,4 @@ class CategoriesController {
   }
 }
 
-export default CategoriesController;
+export default GenresController;

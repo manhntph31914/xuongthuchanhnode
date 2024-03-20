@@ -1,11 +1,14 @@
-import express  from "express";
+import express from "express";
 import CategoriesController from "../controllers/categories.js";
-const categoriesRouter = express.Router();
-const categoriesController =  new CategoriesController();
 
-categoriesRouter.get("/",categoriesController.GetAllCategories );    
-categoriesRouter.get("/:id",categoriesController.GetCategoriedetail);    
-categoriesRouter.post("/",categoriesController.createlCategorie);    
-categoriesRouter.put("/:id", categoriesController.updateCategorie);    
-categoriesRouter.delete("/:id", categoriesController.deleteCategorie);    
+const categoriesRouter = express.Router();
+
+const categoriesController = new CategoriesController();
+
+categoriesRouter.get("/", categoriesController.getAllCategories);
+categoriesRouter.get("/:id", categoriesController.getCategoryDetail);
+categoriesRouter.post("/", categoriesController.creatCategory);
+categoriesRouter.put("/:id", categoriesController.updateCategory);
+categoriesRouter.delete("/:id", categoriesController.deleteCategory);
+
 export default categoriesRouter;
